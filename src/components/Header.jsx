@@ -6,19 +6,26 @@ const Header = () => {
 
     const { user, logOut } = useContext(AuthContext);
 
-    const handleLogOut = () =>{
+    const handleLogOut = () => {
         logOut()
-        .then(() => {})
-        .catch(error => console.log(error))
+            .then(() => { })
+            .catch(error => console.log(error))
     }
 
     return (
         <div>
             <div className="navbar bg-primary text-primary-content">
                 <Link className="btn btn-ghost normal-case text-xl" to='/'>Home</Link>
-                <Link className="btn btn-ghost normal-case text-xl" to='/orders'>Orders</Link>
-                <Link className="btn btn-ghost normal-case text-xl" to='/register'>Register</Link>
-                <Link className="btn btn-ghost normal-case text-xl" to='/login'>Login</Link>
+                {user ? <>
+                    <Link className="btn btn-ghost normal-case text-xl" to='/orders'>Orders</Link>
+                    <Link className="btn btn-ghost normal-case text-xl" to='/profile'>Profile</Link>
+                </> :
+                    <>
+                        <Link className="btn btn-ghost normal-case text-xl" to='/register'>Register</Link>
+                        <Link className="btn btn-ghost normal-case text-xl" to='/login'>Login</Link>
+                    </>
+                }
+
                 {
                     user ? <>
                         <span>{user.email}</span>
@@ -27,6 +34,16 @@ const Header = () => {
                         : <button className="normal-case text-xl">Sign in first</button>
                 }
             </div>
+
+            {/* if we need to show option according to user status
+            {
+                    user ? <>
+                        <Link className="btn btn-ghost normal-case text-xl" to='/orders'>Orders</Link>
+                    </>
+                        : <><Link className="btn btn-ghost normal-case text-xl" to='/register'>Register</Link>
+                        <Link className="btn btn-ghost normal-case text-xl" to='/login'>Login</Link></>
+                } 
+             */}
 
         </div>
     );
