@@ -4,7 +4,7 @@ import { AuthContext } from '../providers/AuthProviders';
 
 const Register = () => {
 
-    const {user, createUser} = useContext(AuthContext)
+    const {user, createUser, signInWithGoogle} = useContext(AuthContext)
 
     // console.log(createUser);
 
@@ -25,6 +25,12 @@ const Register = () => {
         .catch(error => {
             console.log(error);
         })
+    }
+
+    const handleGoogleLogin = () => {
+        signInWithGoogle()
+            .then(result => console.log(result))
+            .catch(error => console.log(error))
     }
 
     return (
@@ -68,6 +74,11 @@ const Register = () => {
                         <div className="form-control mt-6">
                             <button type='submit' className="btn btn-primary">Register</button>
                         </div>
+
+                        <div className='mx-auto my-4 w-full'>
+                        <button onClick={handleGoogleLogin} className="btn btn-outline btn-success mx-auto w-full">Google</button>
+
+                    </div>
                     </div>
                 </form>
             </div>
